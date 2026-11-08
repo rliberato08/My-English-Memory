@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#111111">
+
+<title>My English Memory</title>
+
+<style>
+
+:root {
+
+  --bg: #111111;
+
+  --card: #1d1d1d;
+
+  --card2: #252525;
+
+  --gold: #c5a46d;
+
+  --white: #ffffff;
+
+  --muted: #aaaaaa;
+
+  --green: #628d70;
+
+  --red: #a65f5f;
+
+}
+
+* { box-sizing: border-box; }
+
+body {
+
+  margin: 0;
+
+  background: var(--bg);
+
+  color: var(--white);
+
+  font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+
+}
+
+header {
+
+  padding: 28px 20px 15px;
+
+  text-align: center;
+
+}
+
+.logo {
+
+  color: var(--gold);
+
+  letter-spacing: 3px;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+}
+
+h1 {
+
+  font-family: Georgia, serif;
+
+  font-weight: normal;
+
+  font-size: 30px;
+
+  margin: 12px 0 5px;
+
+}
+
+.subtitle {
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+}
+
+.container {
+
+  max-width: 520px;
+
+  margin: auto;
+
+  padding: 15px 18px 100px;
+
+}
+
+.stats {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin: 15px 0 25px;
+
+}
+
+.stat {
+
+  background: var(--card);
+
+  border-radius: 12px;
+
+  padding: 15px 5px;
+
+  text-align: center;
+
+}
+
+.stat strong {
+
+  display: block;
+
+  color: var(--gold);
+
+  font-size: 23px;
+
+}
+
+.stat span {
+
+  font-size: 11px;
+
+  color: var(--muted);
+
+}
+
+.section-title {
+
+  font-family: Georgia, serif;
+
+  font-size: 21px;
+
+  margin: 25px 0 15px;
+
+}
+
+.card {
+
+  background: var(--card);
+
+  border: 1px solid #333;
+
+  border-radius: 17px;
+
+  padding: 23px 19px;
+
+  margin-bottom: 15px;
+
+}
+
+.badge {
+
+  display: inline-block;
+
+  color: var(--gold);
+
+  border: 1px solid var(--gold);
+
+  border-radius: 20px;
+
+  padding: 5px 12px;
+
+  font-size: 11px;
+
+  margin-bottom: 18px;
+
+}
+
+.phrase {
+
+  font-family: Georgia, serif;
+
+  font-size: 25px;
+
+  line-height: 1.4;
+
+  margin: 10px 0;
+
+}
+
+.translation {
+
+  color: var(--gold);
+
+  font-size: 17px;
+
+  margin: 15px 0;
+
+}
+
+.muted {
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+}
+
+button, select, input, textarea {
+
+  font: inherit;
+
+}
+
+button {
+
+  border: none;
+
+  cursor: pointer;
+
+  border-radius: 10px;
+
+  padding: 13px 15px;
+
+  font-weight: 600;
+
+}
+
+.primary {
+
+  background: var(--gold);
+
+  color: #111;
+
+  width: 100%;
+
+}
+
+.secondary {
+
+  background: var(--card2);
+
+  color: white;
+
+  border: 1px solid #444;
+
+}
+
+.actions {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+}
+
+.rating {
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 9px;
+
+  margin-top: 20px;
+
+}
+
+.rating button {
+
+  background: var(--card2);
+
+  color: white;
+
+  border: 1px solid #444;
+
+  font-size: 13px;
+
+}
+
+.rating button:nth-child(1) { border-color: var(--red); }
+
+.rating button:nth-child(2) { border-color: #b58b54; }
+
+.rating button:nth-child(3) { border-color: var(--green); }
+
+.rating button:nth-child(4) { border-color: var(--gold); }
+
+input, select, textarea {
+
+  width: 100%;
+
+  padding: 13px;
+
+  background: #252525;
+
+  color: white;
+
+  border: 1px solid #444;
+
+  border-radius: 9px;
+
+  margin: 7px 0 15px;
+
+}
+
+label {
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+}
+
+nav {
+
+  position: fixed;
+
+  bottom: 0;
+
+  left: 0;
+
+  right: 0;
+
+  background: #191919;
+
+  border-top: 1px solid #333;
+
+  display: flex;
+
+  justify-content: space-around;
+
+  padding: 12px 5px calc(12px + env(safe-area-inset-bottom));
+
+  z-index: 10;
+
+}
+
+nav button {
+
+  background: none;
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  padding: 7px;
+
+}
+
+nav button.active { color: var(--gold); }
+
+.page { display: none; }
+
+.page.active { display: block; }
+
+.progress {
+
+  height: 7px;
+
+  background: #333;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  margin: 12px 0;
+
+}
+
+.progress div {
+
+  height: 100%;
+
+  background: var(--gold);
+
+}
+
+.phrase-item {
+
+  border-bottom: 1px solid #333;
+
+  padding: 15px 0;
+
+}
+
+.phrase-item strong { font-size: 15px; }
+
+.phrase-item small { color: var(--muted); display: block; margin-top: 6px; }
+
+.empty {
+
+  color: var(--muted);
+
+  text-align: center;
+
+  padding: 25px 5px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">YOUR PERSONAL ENGLISH JOURNAL</div>
+
+  <h1>My English Memory</h1>
+
+  <div class="subtitle">Learn it. Remember it. Speak it.</div>
+
+</header>
+
+<div class="container">
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+  <div class="stats">
+
+    <div class="stat">
+
+      <strong id="total">0</strong>
+
+      <span>Mis frases</span>
+
+    </div>
+
+    <div class="stat">
+
+      <strong id="due">0</strong>
+
+      <span>Por repasar</span>
+
+    </div>
+
+    <div class="stat">
+
+      <strong id="learned">0</strong>
+
+      <span>Dominadas</span>
+
+    </div>
+
+  </div>
+
+  <div class="section-title">Your daily practice</div>
+
+  <div class="card">
+
+    <div class="muted">TU PROGRESO</div>
+
+    <div class="progress"><div id="progressBar"></div></div>
+
+    <div class="muted" id="progressText">¡Cada frase cuenta!</div>
+
+  </div>
+
+  <div class="section-title">Today's review</div>
+
+  <div class="card">
+
+    <p class="muted">Es hora de fortalecer tu memoria.</p>
+
+    <h2 id="dueMessage" style="font-family:Georgia;font-weight:normal">
+
+      ¡Comencemos!
+
+    </h2>
+
+    <button class="primary" onclick="startReview()">COMENZAR REPASO</button>
+
+  </div>
+
+  <div class="section-title">Your collection</div>
+
+  <div class="card">
+
+    <p class="muted">Construye tu propio inglés con frases que realmente utilizas.</p>
+
+    <button class="secondary" style="width:100%" onclick="showPage('add')">
+
+      + AGREGAR UNA FRASE
+
+    </button>
+
+  </div>
+
+</section>
+
+<!-- REVIEW -->
+
+<section id="review" class="page">
+
+  <div class="section-title">Memory training</div>
+
+  <div class="card" id="reviewCard">
+
+    <div class="empty">Presiona comenzar para iniciar.</div>
+
+  </div>
+
+</section>
+
+<!-- ADD -->
+
+<section id="add" class="page">
+
+  <div class="section-title">Add a new phrase</div>
+
+  <div class="card">
+
+    <label>Frase en inglés</label>
+
+    <textarea id="english" rows="3" placeholder="I was wondering if you could help me."></textarea>
+
+    <label>Traducción en español</label>
+
+    <textarea id="spanish" rows="2" placeholder="Quería saber si podrías ayudarme."></textarea>
+
+    <label>Nivel de inglés</label>
+
+    <select id="level">
+
+      <option>A1 - Beginner</option>
+
+      <option>A2 - Elementary</option>
+
+      <option>B1 - Intermediate</option>
+
+      <option>B2 - Upper Intermediate</option>
+
+      <option>C1 - Advanced</option>
+
+      <option>C2 - Proficient</option>
+
+    </select>
+
+    <label>Categoría</label>
+
+    <select id="category">
+
+      <option>Conversaciones cotidianas</option>
+
+      <option>Trabajo y clientes</option>
+
+      <option>Familia</option>
+
+      <option>Compras</option>
+
+      <option>Expresiones naturales</option>
+
+      <option>Gramática</option>
+
+      <option>Otras</option>
+
+    </select>
+
+    <button class="primary" onclick="addPhrase()">GUARDAR FRASE</button>
+
+  </div>
+
+</section>
+
+<!-- COLLECTION -->
+
+<section id="collection" class="page">
+
+  <div class="section-title">My phrase collection</div>
+
+  <select id="filterLevel" onchange="renderCollection()">
+
+    <option value="all">Todos los niveles</option>
+
+    <option>A1 - Beginner</option>
+
+    <option>A2 - Elementary</option>
+
+    <option>B1 - Intermediate</option>
+
+    <option>B2 - Upper Intermediate</option>
+
+    <option>C1 - Advanced</option>
+
+    <option>C2 - Proficient</option>
+
+  </select>
+
+  <div id="phraseList"></div>
+
+</section>
+
+</div>
+
+<nav>
+
+  <button class="active" onclick="showPage('home',this)">⌂<br>Inicio</button>
+
+  <button onclick="showPage('review',this)">◉<br>Repasar</button>
+
+  <button onclick="showPage('add',this)">＋<br>Agregar</button>
+
+  <button onclick="showPage('collection',this)">▤<br>Mis frases</button>
+
+</nav>
+
+<script>
+
+const STORAGE_KEY = "myEnglishMemory_v1";
+
+let phrases = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+
+if (!phrases) {
+
+  phrases = [
+
+    {
+
+      id: 1,
+
+      english: "I was wondering if you could help me.",
+
+      spanish: "Quería saber si podrías ayudarme.",
+
+      level: "B2 - Upper Intermediate",
+
+      category: "Conversaciones cotidianas",
+
+      next: 0,
+
+      interval: 0,
+
+      repetitions: 0,
+
+      reviews: 0
+
+    },
+
+    {
+
+      id: 2,
+
+      english: "No worries at all.",
+
+      spanish: "No te preocupes en absoluto.",
+
+      level: "A2 - Elementary",
+
+      category: "Conversaciones cotidianas",
+
+      next: 0,
+
+      interval: 0,
+
+      repetitions: 0,
+
+      reviews: 0
+
+    },
+
+    {
+
+      id: 3,
+
+      english: "I really appreciate your help.",
+
+      spanish: "Realmente agradezco tu ayuda.",
+
+      level: "B1 - Intermediate",
+
+      category: "Expresiones naturales",
+
+      next: 0,
+
+      interval: 0,
+
+      repetitions: 0,
+
+      reviews: 0
+
+    }
+
+  ];
+
+  save();
+
+}
+
+function save() {
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(phrases));
+
+}
+
+function showPage(id, button) {
+
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+
+  if (button) button.classList.add("active");
+
+  if (id === "collection") renderCollection();
+
+  updateDashboard();
+
+}
+
+function addPhrase() {
+
+  const english = document.getElementById("english").value.trim();
+
+  const spanish = document.getElementById("spanish").value.trim();
+
+  if (!english || !spanish) {
+
+    alert("Escribe la frase en inglés y su traducción.");
+
+    return;
+
+  }
+
+  phrases.push({
+
+    id: Date.now(),
+
+    english,
+
+    spanish,
+
+    level: document.getElementById("level").value,
+
+    category: document.getElementById("category").value,
+
+    next: 0,
+
+    interval: 0,
+
+    repetitions: 0,
+
+    reviews: 0
+
+  });
+
+  save();
+
+  document.getElementById("english").value = "";
+
+  document.getElementById("spanish").value = "";
+
+  alert("¡Tu frase se guardó correctamente!");
+
+  showPage("collection");
+
+}
+
+function speak(text) {
+
+  if (!("speechSynthesis" in window)) {
+
+    alert("Tu navegador no admite reproducción de voz.");
+
+    return;
+
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "en-US";
+
+  utterance.rate = 0.85;
+
+  speechSynthesis.speak(utterance);
+
+}
+
+let reviewQueue = [];
+
+let current = null;
+
+let revealed = false;
+
+function startReview() {
+
+  reviewQueue = phrases.filter(p => p.next <= Date.now());
+
+  showPage("review");
+
+  if (reviewQueue.length === 0) {
+
+    document.getElementById("reviewCard").innerHTML =
+
+      '<div class="empty">🎉 ¡Excelente! No tienes frases pendientes de repaso.</div>';
+
+    return;
+
+  }
+
+  nextCard();
+
+}
+
+function nextCard() {
+
+  if (reviewQueue.length === 0) {
+
+    current = null;
+
+    document.getElementById("reviewCard").innerHTML =
+
+      '<div class="empty"><h2>¡Well done!</h2>Has terminado tu repaso de hoy. 🖤</div>';
+
+    updateDashboard();
+
+    return;
+
+  }
+
+  current = reviewQueue.shift();
+
+  revealed = false;
+
+  document.getElementById("reviewCard").innerHTML = `
+
+    <span class="badge">${current.level}</span>
+
+    <div class="muted">${current.category}</div>
+
+    <div class="phrase">${current.english}</div>
+
+    <button class="secondary" onclick="speak(current.english)">
+
+      🔊 Escuchar pronunciación
+
+    </button>
+
+    <div id="answer" style="display:none">
+
+      <div class="translation">${current.spanish}</div>
+
+    </div>
+
+    <button id="revealButton" class="primary" style="margin-top:20px"
+
+      onclick="revealAnswer()">
+
+      VER TRADUCCIÓN
+
+    </button>
+
+    <div id="ratings" style="display:none">
+
+      <p class="muted">¿Qué tan bien recordaste esta frase?</p>
+
+      <div class="rating">
+
+        <button onclick="rate(0)">🔴 Otra vez</button>
+
+        <button onclick="rate(1)">🟠 Difícil</button>
+
+        <button onclick="rate(2)">🟢 Bien</button>
+
+        <button onclick="rate(3)">🔵 Fácil</button>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+function revealAnswer() {
+
+  revealed = true;
+
+  document.getElementById("answer").style.display = "block";
+
+  document.getElementById("revealButton").style.display = "none";
+
+  document.getElementById("ratings").style.display = "block";
+
+}
+
+function rate(score) {
+
+  if (!current || !revealed) return;
+
+  const now = Date.now();
+
+  if (score === 0) {
+
+    current.interval = 0;
+
+    current.next = now + 10 * 60 * 1000;
+
+    reviewQueue.push(current);
+
+  }
+
+  if (score === 1) {
+
+    current.interval = Math.max(1, current.interval * 1.2 || 1);
+
+    current.next = now + current.interval * 86400000;
+
+  }
+
+  if (score === 2) {
+
+    current.interval = current.interval === 0 ? 3 :
+
+      Math.max(1, current.interval * 2);
+
+    current.next = now + current.interval * 86400000;
+
+    current.repetitions++;
+
+  }
+
+  if (score === 3) {
+
+    current.interval = current.interval === 0 ? 7 :
+
+      Math.max(1, current.interval * 2.5);
+
+    current.next = now + current.interval * 86400000;
+
+    current.repetitions++;
+
+  }
+
+  current.reviews++;
+
+  save();
+
+  updateDashboard();
+
+  nextCard();
+
+}
+
+function renderCollection() {
+
+  const filter = document.getElementById("filterLevel").value;
+
+  const list = document.getElementById("phraseList");
+
+  const filtered = phrases.filter(p =>
+
+    filter === "all" || p.level === filter
+
+  );
+
+  if (filtered.length === 0) {
+
+    list.innerHTML = '<div class="empty">No hay frases en este nivel todavía.</div>';
+
+    return;
+
+  }
+
+  list.innerHTML = filtered.map(p => `
+
+    <div class="phrase-item">
+
+      <span class="badge">${p.level}</span>
+
+      <strong>${escapeHTML(p.english)}</strong>
+
+      <small>${escapeHTML(p.spanish)}</small>
+
+      <small>${escapeHTML(p.category)}</small>
+
+      <div class="actions">
+
+        <button class="secondary" onclick="speak(${JSON.stringify(p.english).replace(/</g,'\\u003c')})">🔊 Escuchar</button>
+
+        <button class="secondary" onclick="deletePhrase(${p.id})">Eliminar</button>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+}
+
+function escapeHTML(value) {
+
+  return String(value).replace(/[&<>"']/g, c => ({
+
+    "&": "&amp;",
+
+    "<": "&lt;",
+
+    ">": "&gt;",
+
+    '"': "&quot;",
+
+    "'": "&#39;"
+
+  })[c]);
+
+}
+
+function deletePhrase(id) {
+
+  if (!confirm("¿Quieres eliminar esta frase?")) return;
+
+  phrases = phrases.filter(p => p.id !== id);
+
+  save();
+
+  renderCollection();
+
+  updateDashboard();
+
+}
+
+function updateDashboard() {
+
+  const now = Date.now();
+
+  const dueCount = phrases.filter(p => p.next <= now).length;
+
+  const learnedCount = phrases.filter(p => p.repetitions >= 3).length;
+
+  document.getElementById("total").textContent = phrases.length;
+
+  document.getElementById("due").textContent = dueCount;
+
+  document.getElementById("learned").textContent = learnedCount;
+
+  const percentage = phrases.length ?
+
+    Math.round(learnedCount / phrases.length * 100) : 0;
+
+  document.getElementById("progressBar").style.width = percentage + "%";
+
+  document.getElementById("progressText").textContent =
+
+    percentage + "% de tus frases dominadas";
+
+  document.getElementById("dueMessage").textContent =
+
+    dueCount > 0 ?
+
+    `Tienes ${dueCount} frases para repasar.` :
+
+    "¡Todo al día! Buen trabajo.";
+
+}
+
+updateDashboard();
+
+</script>
+
+</body>
+
+</html>
